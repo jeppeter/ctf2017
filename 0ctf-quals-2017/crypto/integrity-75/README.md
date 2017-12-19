@@ -33,7 +33,7 @@ Welcome admin!
 flag{Easy_br0ken_scheme_cann0t_keep_y0ur_integrity}
 """
 ```
-上面的代码，先把admin形成一个数据，因为加密，其实得到了前面的32个字节就是我们想要得到的数据，再一解吗，就是我们得到的数据，如下面的形式
+上面的代码，先把admin形成一个数据，因为加密，其实得到了前面的32个字节就是我们想要得到的数据，再一解码，就是我们得到的数据，如下面的形式
 username ("md5admin+admin") ==>          pad ("md5admin+admin          ")  ==> (iv + enc(md5admin)+enc(admin)) 
 解码的时候
 encusername(enc(md5admin) + enc(admin)) ==> md5admin + admin
