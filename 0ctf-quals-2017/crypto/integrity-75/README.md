@@ -37,5 +37,7 @@ flag{Easy_br0ken_scheme_cann0t_keep_y0ur_integrity}
 username ("md5admin+admin") ==>          pad ("md5admin+admin          ")  ==> (iv + enc(md5admin)+enc(admin)) 
 解码的时候
 encusername(enc(md5admin) + enc(admin)) ==> md5admin + admin
-这里面最大的原因是因为CBC有一个特性，就是它的IV第一个我们输入的，但后面的是依据前面的一个块的加密内容成为IV，这个特性很重要，是这里面的关键
+
+这里面最大的原因是因为CBC有一个特性，就是它的IV第一个我们输入的，
+但后面的是依据前面的一个块的加密内容成为IV，这个特性很重要，是这里面的关键
 
