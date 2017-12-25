@@ -73,6 +73,8 @@ print hex(polyton(ciphertext[4] + (K5 * (keys[3] + t) + t))).decode('hex')
 
 ## 解题思路
 > 这里原来的方法是![x](x.png) 与 ![y](y.png)
+
 > 变成的![xy](xy.png)
+
 > ![ab](ab.png)
 > 反向得到当前的逆方法就是了。
