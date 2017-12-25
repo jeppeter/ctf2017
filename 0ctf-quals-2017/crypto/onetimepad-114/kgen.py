@@ -5,9 +5,9 @@ import sys
 import logging
 import extargsparse
 
-#P = 0x10000000000000000000000000000000000000000000000000000000000000425L
+P = 0x10000000000000000000000000000000000000000000000000000000000000425L
 #P = 0x10425L
-P=0x10322L
+#P=0x10322L
 
 
 def process(m, k):
@@ -18,10 +18,10 @@ def process(m, k):
         res = res << 1;
         if (int(i)):
             res = res ^ tmp
-            logging.info('res [%x] [%s]'%(res,bin(res)[2:]))
-        if (res >> 16):
+            logging.info('[%s]res [%x] [%s]'%(i,res,bin(res)[2:]))
+        if (res >> 256):
             res = res ^ P
-        logging.info('res [%x] [%s]'%(res,bin(res)[2:]))
+        logging.info('[%s]res [%x] [%s]'%(i,res,bin(res)[2:]))
     return res
 
 def keygen(seed,key):
@@ -92,6 +92,19 @@ def filter_handler(args,parser):
     sys.exit(0)
     return
 
+def decrypt_handler(args,parser):
+    set_log_level(args)
+    seed = parse_int(args.subnargs[0])
+    base = parse_int(args.subnargs[1])
+    okey = process(base,seed)
+    for i in range(args.times):
+        nkey = process(okey,0)
+        logging.info('[%03d][0x%x] => [0x%x]'%(i,okey,nkey))
+        okey = nkey
+    sys.stdout.write('[%s][0x%x][0x%x] => [0x%x]\n'%(args.times,seed, base,nkey))
+    sys.exit(0)
+    return
+
 
 def main():
     global P
@@ -106,6 +119,9 @@ def main():
         },
         "filter<filter_handler>" : {
             "$" : 3
+        },
+        "decrypt<decrypt_handler>" : {
+            "$" : 2
         }
     }
     '''
