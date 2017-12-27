@@ -1,6 +1,6 @@
 # 解析char-130
 
-> 参考了[http://blog.dragonsector.pl/2017/03/0ctf-2017-char-shellcoding-132.html](http://blog.dragonsector.pl/2017/03/0ctf-2017-char-shellcoding-132.html)
+> 参考了[https://gist.github.com/rick2600/ae2af7ffd33a17836f06ce191f643b26](https://gist.github.com/rick2600/ae2af7ffd33a17836f06ce191f643b26)
 
 > 主要解法
 
